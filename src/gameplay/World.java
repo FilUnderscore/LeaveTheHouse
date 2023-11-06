@@ -1,15 +1,17 @@
 
 package gameplay;
 
-public class World {
+import gamemap_grammar.GameMapBaseVisitor;
+
+import java.util.List;
+
+public class World extends GameMapBaseVisitor {
     public enum PlayMode {battle, explore;}
 
     Player player;
     PlayMode mode;
 
-
-
-
+    List<Room> rooms;
 
     //--------------------------------------------------------
     public void onEnterRoom()

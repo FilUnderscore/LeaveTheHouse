@@ -3,15 +3,17 @@ grammar GameMap;
 /** the start rule, begin parsing here **/
 
 
-gamemap : ((door | monster | item | tc | wc) (WS | NEWLINE))* NEWLINE?;
-door: 'D' WS WORDINT;
-monster: 'M' WS WORD;
-item: 'I' WS WORD;
-tc: 'TC' WS WORD;
-wc: 'WC' WS WORD;
+gamemap : room* EOF;
+room: (WORD SEP OPEN (WS | NEWLINE)? ((room | monster | item | tc | wc) NEWLINE*)* NEWLINE CLOSE);
+
+monster: 'M' WORD;
+item: 'I' WORD;
+tc: 'TC' WORD;
+wc: 'WC' WORD;
 
 NEWLINE: '\r'? '\n' ;     // return newlines to parser (is end-statement signal)
-WORD: ([A-Za-z])+;
-INT: [0-9]+;
-WORDINT: WORD INT;
-WS: (' ' | '\t')+ {skip();};
+WORD: ([A-Za-z0-9])+;
+WS: (' ' | '\t')+ -> skip;
+SEP: ':';
+OPEN: '{';
+CLOSE: '}';

@@ -1,4 +1,4 @@
-// Generated from /Users/kjohnson/Archive/Teaching/2023-Teaching/COMP711/Assessments/Software Project/TextGameEngine/TextGameEngine/src/GameMap.g4 by ANTLR 4.12.0
+// Generated from E:/Downloads/Start_TextGameEngine/TextGameEngine/src/GameMap.g4 by ANTLR 4.13.1
 package gamemap_grammar;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -16,4 +16,34 @@ public interface GameMapVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGamemap(GameMapParser.GamemapContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#room}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRoom(GameMapParser.RoomContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#monster}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMonster(GameMapParser.MonsterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#item}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitItem(GameMapParser.ItemContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#tc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTc(GameMapParser.TcContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#wc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWc(GameMapParser.WcContext ctx);
 }

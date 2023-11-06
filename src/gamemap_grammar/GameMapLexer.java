@@ -1,4 +1,4 @@
-// Generated from /Users/kjohnson/Archive/Teaching/2023-Teaching/COMP711/Assessments/Software Project/TextGameEngine/TextGameEngine/src/GameMap.g4 by ANTLR 4.12.0
+// Generated from E:/Downloads/Start_TextGameEngine/TextGameEngine/src/GameMap.g4 by ANTLR 4.13.1
 package gamemap_grammar;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -9,15 +9,16 @@ import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
 public class GameMapLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.12.0", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		NEWLINE=1;
+		T__0=1, T__1=2, T__2=3, T__3=4, NEWLINE=5, WORD=6, WS=7, SEP=8, OPEN=9, 
+		CLOSE=10;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -28,19 +29,22 @@ public class GameMapLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"NEWLINE"
+			"T__0", "T__1", "T__2", "T__3", "NEWLINE", "WORD", "WS", "SEP", "OPEN", 
+			"CLOSE"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
+			null, "'M'", "'I'", "'TC'", "'WC'", null, null, null, "':'", "'{'", "'}'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "NEWLINE"
+			null, null, null, null, null, "NEWLINE", "WORD", "WS", "SEP", "OPEN", 
+			"CLOSE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -102,13 +106,42 @@ public class GameMapLexer extends Lexer {
 	public ATN getATN() { return _ATN; }
 
 	public static final String _serializedATN =
-		"\u0004\u0000\u0001\b\u0006\uffff\uffff\u0002\u0000\u0007\u0000\u0001\u0000"+
-		"\u0003\u0000\u0005\b\u0000\u0001\u0000\u0001\u0000\u0000\u0000\u0001\u0001"+
-		"\u0001\u0001\u0000\u0000\b\u0000\u0001\u0001\u0000\u0000\u0000\u0001\u0004"+
-		"\u0001\u0000\u0000\u0000\u0003\u0005\u0005\r\u0000\u0000\u0004\u0003\u0001"+
-		"\u0000\u0000\u0000\u0004\u0005\u0001\u0000\u0000\u0000\u0005\u0006\u0001"+
-		"\u0000\u0000\u0000\u0006\u0007\u0005\n\u0000\u0000\u0007\u0002\u0001\u0000"+
-		"\u0000\u0000\u0002\u0000\u0004\u0000";
+		"\u0004\u0000\n6\u0006\uffff\uffff\u0002\u0000\u0007\u0000\u0002\u0001"+
+		"\u0007\u0001\u0002\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004"+
+		"\u0007\u0004\u0002\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007"+
+		"\u0007\u0007\u0002\b\u0007\b\u0002\t\u0007\t\u0001\u0000\u0001\u0000\u0001"+
+		"\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0003\u0001"+
+		"\u0003\u0001\u0003\u0001\u0004\u0003\u0004!\b\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0005\u0004\u0005&\b\u0005\u000b\u0005\f\u0005\'\u0001\u0006"+
+		"\u0004\u0006+\b\u0006\u000b\u0006\f\u0006,\u0001\u0006\u0001\u0006\u0001"+
+		"\u0007\u0001\u0007\u0001\b\u0001\b\u0001\t\u0001\t\u0000\u0000\n\u0001"+
+		"\u0001\u0003\u0002\u0005\u0003\u0007\u0004\t\u0005\u000b\u0006\r\u0007"+
+		"\u000f\b\u0011\t\u0013\n\u0001\u0000\u0002\u0003\u000009AZaz\u0002\u0000"+
+		"\t\t  8\u0000\u0001\u0001\u0000\u0000\u0000\u0000\u0003\u0001\u0000\u0000"+
+		"\u0000\u0000\u0005\u0001\u0000\u0000\u0000\u0000\u0007\u0001\u0000\u0000"+
+		"\u0000\u0000\t\u0001\u0000\u0000\u0000\u0000\u000b\u0001\u0000\u0000\u0000"+
+		"\u0000\r\u0001\u0000\u0000\u0000\u0000\u000f\u0001\u0000\u0000\u0000\u0000"+
+		"\u0011\u0001\u0000\u0000\u0000\u0000\u0013\u0001\u0000\u0000\u0000\u0001"+
+		"\u0015\u0001\u0000\u0000\u0000\u0003\u0017\u0001\u0000\u0000\u0000\u0005"+
+		"\u0019\u0001\u0000\u0000\u0000\u0007\u001c\u0001\u0000\u0000\u0000\t "+
+		"\u0001\u0000\u0000\u0000\u000b%\u0001\u0000\u0000\u0000\r*\u0001\u0000"+
+		"\u0000\u0000\u000f0\u0001\u0000\u0000\u0000\u00112\u0001\u0000\u0000\u0000"+
+		"\u00134\u0001\u0000\u0000\u0000\u0015\u0016\u0005M\u0000\u0000\u0016\u0002"+
+		"\u0001\u0000\u0000\u0000\u0017\u0018\u0005I\u0000\u0000\u0018\u0004\u0001"+
+		"\u0000\u0000\u0000\u0019\u001a\u0005T\u0000\u0000\u001a\u001b\u0005C\u0000"+
+		"\u0000\u001b\u0006\u0001\u0000\u0000\u0000\u001c\u001d\u0005W\u0000\u0000"+
+		"\u001d\u001e\u0005C\u0000\u0000\u001e\b\u0001\u0000\u0000\u0000\u001f"+
+		"!\u0005\r\u0000\u0000 \u001f\u0001\u0000\u0000\u0000 !\u0001\u0000\u0000"+
+		"\u0000!\"\u0001\u0000\u0000\u0000\"#\u0005\n\u0000\u0000#\n\u0001\u0000"+
+		"\u0000\u0000$&\u0007\u0000\u0000\u0000%$\u0001\u0000\u0000\u0000&\'\u0001"+
+		"\u0000\u0000\u0000\'%\u0001\u0000\u0000\u0000\'(\u0001\u0000\u0000\u0000"+
+		"(\f\u0001\u0000\u0000\u0000)+\u0007\u0001\u0000\u0000*)\u0001\u0000\u0000"+
+		"\u0000+,\u0001\u0000\u0000\u0000,*\u0001\u0000\u0000\u0000,-\u0001\u0000"+
+		"\u0000\u0000-.\u0001\u0000\u0000\u0000./\u0006\u0006\u0000\u0000/\u000e"+
+		"\u0001\u0000\u0000\u000001\u0005:\u0000\u00001\u0010\u0001\u0000\u0000"+
+		"\u000023\u0005{\u0000\u00003\u0012\u0001\u0000\u0000\u000045\u0005}\u0000"+
+		"\u00005\u0014\u0001\u0000\u0000\u0000\u0004\u0000 \',\u0001\u0006\u0000"+
+		"\u0000";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
