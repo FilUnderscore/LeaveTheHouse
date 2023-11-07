@@ -41,6 +41,18 @@ public class GameMapBaseListener implements GameMapListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDoor(GameMapParser.DoorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDoor(GameMapParser.DoorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMonster(GameMapParser.MonsterContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -48,6 +60,42 @@ public class GameMapBaseListener implements GameMapListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMonster(GameMapParser.MonsterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHp(GameMapParser.HpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHp(GameMapParser.HpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDmg(GameMapParser.DmgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDmg(GameMapParser.DmgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDmg_hilo(GameMapParser.Dmg_hiloContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDmg_hilo(GameMapParser.Dmg_hiloContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

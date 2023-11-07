@@ -11,11 +11,20 @@ public abstract class Entity {
         this.description = description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    @Override
+    public String toString() {
+        return this.id;
+    }
+
     protected int randInt(int x, int y) {
         return new Random().nextInt(y - x) + x;
     }
 
-    public int compareID(String string) {
-        return this.id.toLowerCase().compareTo(string.toLowerCase());
+    public boolean compareID(String string) {
+        return this.id.equalsIgnoreCase(string);
     }
 }

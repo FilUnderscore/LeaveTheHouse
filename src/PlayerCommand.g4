@@ -4,11 +4,25 @@ grammar PlayerCommand;
 
 
 input: command NEWLINE;
-command : WORD | WORD (WS (WORD | INT))+;
+command: (door | pickup | exit | describe | admire | eat | stats | wield | open | attack | help);
 
+// Explore-mode commands
+door: 'door' WORD;
+pickup: 'pickup' WORD;
+exit: 'exit';
+describe: 'describe';
+admire: 'admire' WORD;
+eat: 'eat' WORD;
+stats: 'stats';
+wield: 'wield' WORD;
+open: 'open' WORD;
+
+// Battle-mode commands
+attack: 'attack';
+
+help: 'help';
 
 NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
 
-WORD: ([A-Z]|[a-z])+;
-INT: [0-9]+;
-WS: (' ' | '\t')+ {skip();};
+WORD: ([A-Za-z0-9])+;
+WS: (' ' | '\t')+ -> skip;

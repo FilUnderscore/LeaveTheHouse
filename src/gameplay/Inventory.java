@@ -1,9 +1,6 @@
-/*
 package gameplay;
 
 import java.util.ArrayList;
-
-import pickups.Pickup;
 
 public class Inventory 
 {
@@ -70,4 +67,3 @@ public class Inventory
 		return items;
 	}
 }
-*/

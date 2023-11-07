@@ -28,6 +28,16 @@ public interface GameMapListener extends ParseTreeListener {
 	 */
 	void exitRoom(GameMapParser.RoomContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GameMapParser#door}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoor(GameMapParser.DoorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#door}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoor(GameMapParser.DoorContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GameMapParser#monster}.
 	 * @param ctx the parse tree
 	 */
@@ -37,6 +47,36 @@ public interface GameMapListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMonster(GameMapParser.MonsterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GameMapParser#hp}.
+	 * @param ctx the parse tree
+	 */
+	void enterHp(GameMapParser.HpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#hp}.
+	 * @param ctx the parse tree
+	 */
+	void exitHp(GameMapParser.HpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GameMapParser#dmg}.
+	 * @param ctx the parse tree
+	 */
+	void enterDmg(GameMapParser.DmgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#dmg}.
+	 * @param ctx the parse tree
+	 */
+	void exitDmg(GameMapParser.DmgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GameMapParser#dmg_hilo}.
+	 * @param ctx the parse tree
+	 */
+	void enterDmg_hilo(GameMapParser.Dmg_hiloContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#dmg_hilo}.
+	 * @param ctx the parse tree
+	 */
+	void exitDmg_hilo(GameMapParser.Dmg_hiloContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GameMapParser#item}.
 	 * @param ctx the parse tree

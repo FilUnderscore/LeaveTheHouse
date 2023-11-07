@@ -32,8 +32,8 @@ public class ReadWorldDataFile
             GameMapParser parser = new GameMapParser(tokens);
             ParseTree tree = parser.gamemap();
             WorldVisitor worldVisitor = new WorldVisitor();
-            Entity entity = worldVisitor.visit(tree);
-            return null;
+            World world = (World) worldVisitor.visit(tree);
+            return world;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

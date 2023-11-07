@@ -23,11 +23,35 @@ public interface GameMapVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRoom(GameMapParser.RoomContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GameMapParser#door}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDoor(GameMapParser.DoorContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GameMapParser#monster}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMonster(GameMapParser.MonsterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#hp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHp(GameMapParser.HpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#dmg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDmg(GameMapParser.DmgContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#dmg_hilo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDmg_hilo(GameMapParser.Dmg_hiloContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GameMapParser#item}.
 	 * @param ctx the parse tree

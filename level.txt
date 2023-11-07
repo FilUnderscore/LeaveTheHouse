@@ -1,5 +1,13 @@
-start: {
-    level1: {
+ROOM basement {
+    DOOR sewer
+    ITEM axe {
+        dmg 10 20
+    }
+}
 
+ROOM sewer {
+    DOOR basement
+    MONSTER zombie {
+        hp 200
     }
 }

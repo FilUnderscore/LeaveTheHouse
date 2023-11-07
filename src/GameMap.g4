@@ -5,17 +5,24 @@ grammar GameMap;
 
 gamemap : room* EOF;
 
-room: (WORD SEP OPEN (WS | NEWLINE)? ((room | monster | item | tc | wc) NEWLINE*)* NEWLINE CLOSE 'ROOM;');
+room: ('ROOM' WORD BLOCK_OPEN ((door | monster | item | tc | wc) NEWLINE*)* BLOCK_CLOSE);
 
-monster: (WORD SEP OPEN (WS | NEWLINE)? (('hp' ':' INT) NEWLINE*)* NEWLINE CLOSE 'MONSTER;');
-item: 'I' WORD;
-tc: 'TC' WORD;
-wc: 'WC' WORD;
+door: ('DOOR' WORD);
+monster: ('MONSTER' WORD BLOCK_OPEN ((hp | dmg) NEWLINE*)* BLOCK_CLOSE);
 
-NEWLINE: '\r'? '\n' ;     // return newlines to parser (is end-statement signal)
+hp: 'hp' INT;
+dmg: 'dmg' INT;
+dmg_hilo: 'dmg' INT INT;
+
+item: ('ITEM' WORD BLOCK_OPEN ((dmg_hilo) NEWLINE*)* BLOCK_CLOSE);
+tc: ('TC' BLOCK_OPEN BLOCK_CLOSE);
+wc: ('WC' BLOCK_OPEN BLOCK_CLOSE);
+
+NEWLINE: '\r'? '\n' -> skip;     // return newlines to parser (is end-statement signal)
 INT: ([0-9])+;
 WORD: ([A-Za-z0-9])+;
 WS: (' ' | '\t')+ -> skip;
-SEP: ':';
 OPEN: '{';
 CLOSE: '}';
+BLOCK_OPEN: (WS | NEWLINE)? OPEN (WS | NEWLINE)?;
+BLOCK_CLOSE: (WS | NEWLINE)? CLOSE;

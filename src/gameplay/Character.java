@@ -9,6 +9,14 @@ public abstract class Character extends Entity {
         this.hp = hp;
     }
 
+    protected void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHp() {
+        return this.hp;
+    }
+
     protected abstract int dealAttackDamage();
     public abstract int defendAttack(Character enemy);
 }

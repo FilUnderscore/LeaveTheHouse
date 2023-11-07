@@ -17,28 +17,30 @@ public class GameMapParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, NEWLINE=5, WORD=6, WS=7, SEP=8, OPEN=9, 
-		CLOSE=10;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, NEWLINE=9, 
+		INT=10, WORD=11, WS=12, OPEN=13, CLOSE=14, BLOCK_OPEN=15, BLOCK_CLOSE=16;
 	public static final int
-		RULE_gamemap = 0, RULE_room = 1, RULE_monster = 2, RULE_item = 3, RULE_tc = 4, 
-		RULE_wc = 5;
+		RULE_gamemap = 0, RULE_room = 1, RULE_door = 2, RULE_monster = 3, RULE_hp = 4, 
+		RULE_dmg = 5, RULE_dmg_hilo = 6, RULE_item = 7, RULE_tc = 8, RULE_wc = 9;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"gamemap", "room", "monster", "item", "tc", "wc"
+			"gamemap", "room", "door", "monster", "hp", "dmg", "dmg_hilo", "item", 
+			"tc", "wc"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'M'", "'I'", "'TC'", "'WC'", null, null, null, "':'", "'{'", "'}'"
+			null, "'ROOM'", "'DOOR'", "'MONSTER'", "'hp'", "'dmg'", "'ITEM'", "'TC'", 
+			"'WC'", null, null, null, null, "'{'", "'}'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, "NEWLINE", "WORD", "WS", "SEP", "OPEN", 
-			"CLOSE"
+			null, null, null, null, null, null, null, null, null, "NEWLINE", "INT", 
+			"WORD", "WS", "OPEN", "CLOSE", "BLOCK_OPEN", "BLOCK_CLOSE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -127,21 +129,21 @@ public class GameMapParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(15);
+			setState(23);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==WORD) {
+			while (_la==T__0) {
 				{
 				{
-				setState(12);
+				setState(20);
 				room();
 				}
 				}
-				setState(17);
+				setState(25);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(18);
+			setState(26);
 			match(EOF);
 			}
 		}
@@ -159,19 +161,13 @@ public class GameMapParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class RoomContext extends ParserRuleContext {
 		public TerminalNode WORD() { return getToken(GameMapParser.WORD, 0); }
-		public TerminalNode SEP() { return getToken(GameMapParser.SEP, 0); }
-		public TerminalNode OPEN() { return getToken(GameMapParser.OPEN, 0); }
-		public List<TerminalNode> NEWLINE() { return getTokens(GameMapParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(GameMapParser.NEWLINE, i);
+		public TerminalNode BLOCK_OPEN() { return getToken(GameMapParser.BLOCK_OPEN, 0); }
+		public TerminalNode BLOCK_CLOSE() { return getToken(GameMapParser.BLOCK_CLOSE, 0); }
+		public List<DoorContext> door() {
+			return getRuleContexts(DoorContext.class);
 		}
-		public TerminalNode CLOSE() { return getToken(GameMapParser.CLOSE, 0); }
-		public TerminalNode WS() { return getToken(GameMapParser.WS, 0); }
-		public List<RoomContext> room() {
-			return getRuleContexts(RoomContext.class);
-		}
-		public RoomContext room(int i) {
-			return getRuleContext(RoomContext.class,i);
+		public DoorContext door(int i) {
+			return getRuleContext(DoorContext.class,i);
 		}
 		public List<MonsterContext> monster() {
 			return getRuleContexts(MonsterContext.class);
@@ -197,6 +193,10 @@ public class GameMapParser extends Parser {
 		public WcContext wc(int i) {
 			return getRuleContext(WcContext.class,i);
 		}
+		public List<TerminalNode> NEWLINE() { return getTokens(GameMapParser.NEWLINE); }
+		public TerminalNode NEWLINE(int i) {
+			return getToken(GameMapParser.NEWLINE, i);
+		}
 		public RoomContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -221,102 +221,126 @@ public class GameMapParser extends Parser {
 		enterRule(_localctx, 2, RULE_room);
 		int _la;
 		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(20);
+			setState(28);
+			match(T__0);
+			setState(29);
 			match(WORD);
-			setState(21);
-			match(SEP);
-			setState(22);
-			match(OPEN);
-			setState(24);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
-			case 1:
-				{
-				setState(23);
-				_la = _input.LA(1);
-				if ( !(_la==NEWLINE || _la==WS) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			}
-			setState(41);
+			setState(30);
+			match(BLOCK_OPEN);
+			setState(46);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 94L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 460L) != 0)) {
 				{
 				{
-				setState(31);
+				setState(36);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case WORD:
-					{
-					setState(26);
-					room();
-					}
-					break;
-				case T__0:
-					{
-					setState(27);
-					monster();
-					}
-					break;
 				case T__1:
 					{
-					setState(28);
-					item();
+					setState(31);
+					door();
 					}
 					break;
 				case T__2:
 					{
-					setState(29);
+					setState(32);
+					monster();
+					}
+					break;
+				case T__5:
+					{
+					setState(33);
+					item();
+					}
+					break;
+				case T__6:
+					{
+					setState(34);
 					tc();
 					}
 					break;
-				case T__3:
+				case T__7:
 					{
-					setState(30);
+					setState(35);
 					wc();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(36);
+				setState(41);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(33);
-						match(NEWLINE);
-						}
-						} 
-					}
+				_la = _input.LA(1);
+				while (_la==NEWLINE) {
+					{
+					{
 					setState(38);
+					match(NEWLINE);
+					}
+					}
+					setState(43);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+					_la = _input.LA(1);
 				}
 				}
 				}
-				setState(43);
+				setState(48);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(44);
-			match(NEWLINE);
-			setState(45);
-			match(CLOSE);
+			setState(49);
+			match(BLOCK_CLOSE);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DoorContext extends ParserRuleContext {
+		public TerminalNode WORD() { return getToken(GameMapParser.WORD, 0); }
+		public DoorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_door; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).enterDoor(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).exitDoor(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GameMapVisitor ) return ((GameMapVisitor<? extends T>)visitor).visitDoor(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DoorContext door() throws RecognitionException {
+		DoorContext _localctx = new DoorContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_door);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(51);
+			match(T__1);
+			setState(52);
+			match(WORD);
 			}
 			}
 		}
@@ -334,6 +358,24 @@ public class GameMapParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class MonsterContext extends ParserRuleContext {
 		public TerminalNode WORD() { return getToken(GameMapParser.WORD, 0); }
+		public TerminalNode BLOCK_OPEN() { return getToken(GameMapParser.BLOCK_OPEN, 0); }
+		public TerminalNode BLOCK_CLOSE() { return getToken(GameMapParser.BLOCK_CLOSE, 0); }
+		public List<HpContext> hp() {
+			return getRuleContexts(HpContext.class);
+		}
+		public HpContext hp(int i) {
+			return getRuleContext(HpContext.class,i);
+		}
+		public List<DmgContext> dmg() {
+			return getRuleContexts(DmgContext.class);
+		}
+		public DmgContext dmg(int i) {
+			return getRuleContext(DmgContext.class,i);
+		}
+		public List<TerminalNode> NEWLINE() { return getTokens(GameMapParser.NEWLINE); }
+		public TerminalNode NEWLINE(int i) {
+			return getToken(GameMapParser.NEWLINE, i);
+		}
 		public MonsterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -355,14 +397,205 @@ public class GameMapParser extends Parser {
 
 	public final MonsterContext monster() throws RecognitionException {
 		MonsterContext _localctx = new MonsterContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_monster);
+		enterRule(_localctx, 6, RULE_monster);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47);
-			match(T__0);
-			setState(48);
+			{
+			setState(54);
+			match(T__2);
+			setState(55);
 			match(WORD);
+			setState(56);
+			match(BLOCK_OPEN);
+			setState(69);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==T__3 || _la==T__4) {
+				{
+				{
+				setState(59);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case T__3:
+					{
+					setState(57);
+					hp();
+					}
+					break;
+				case T__4:
+					{
+					setState(58);
+					dmg();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				setState(64);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==NEWLINE) {
+					{
+					{
+					setState(61);
+					match(NEWLINE);
+					}
+					}
+					setState(66);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				}
+				}
+				setState(71);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(72);
+			match(BLOCK_CLOSE);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class HpContext extends ParserRuleContext {
+		public TerminalNode INT() { return getToken(GameMapParser.INT, 0); }
+		public HpContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_hp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).enterHp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).exitHp(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GameMapVisitor ) return ((GameMapVisitor<? extends T>)visitor).visitHp(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final HpContext hp() throws RecognitionException {
+		HpContext _localctx = new HpContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_hp);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(74);
+			match(T__3);
+			setState(75);
+			match(INT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DmgContext extends ParserRuleContext {
+		public TerminalNode INT() { return getToken(GameMapParser.INT, 0); }
+		public DmgContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dmg; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).enterDmg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).exitDmg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GameMapVisitor ) return ((GameMapVisitor<? extends T>)visitor).visitDmg(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DmgContext dmg() throws RecognitionException {
+		DmgContext _localctx = new DmgContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_dmg);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(77);
+			match(T__4);
+			setState(78);
+			match(INT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Dmg_hiloContext extends ParserRuleContext {
+		public List<TerminalNode> INT() { return getTokens(GameMapParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(GameMapParser.INT, i);
+		}
+		public Dmg_hiloContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dmg_hilo; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).enterDmg_hilo(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof GameMapListener ) ((GameMapListener)listener).exitDmg_hilo(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof GameMapVisitor ) return ((GameMapVisitor<? extends T>)visitor).visitDmg_hilo(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Dmg_hiloContext dmg_hilo() throws RecognitionException {
+		Dmg_hiloContext _localctx = new Dmg_hiloContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_dmg_hilo);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(80);
+			match(T__4);
+			setState(81);
+			match(INT);
+			setState(82);
+			match(INT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -379,6 +612,18 @@ public class GameMapParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class ItemContext extends ParserRuleContext {
 		public TerminalNode WORD() { return getToken(GameMapParser.WORD, 0); }
+		public TerminalNode BLOCK_OPEN() { return getToken(GameMapParser.BLOCK_OPEN, 0); }
+		public TerminalNode BLOCK_CLOSE() { return getToken(GameMapParser.BLOCK_CLOSE, 0); }
+		public List<Dmg_hiloContext> dmg_hilo() {
+			return getRuleContexts(Dmg_hiloContext.class);
+		}
+		public Dmg_hiloContext dmg_hilo(int i) {
+			return getRuleContext(Dmg_hiloContext.class,i);
+		}
+		public List<TerminalNode> NEWLINE() { return getTokens(GameMapParser.NEWLINE); }
+		public TerminalNode NEWLINE(int i) {
+			return getToken(GameMapParser.NEWLINE, i);
+		}
 		public ItemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -400,14 +645,51 @@ public class GameMapParser extends Parser {
 
 	public final ItemContext item() throws RecognitionException {
 		ItemContext _localctx = new ItemContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_item);
+		enterRule(_localctx, 14, RULE_item);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
-			match(T__1);
-			setState(51);
+			{
+			setState(84);
+			match(T__5);
+			setState(85);
 			match(WORD);
+			setState(86);
+			match(BLOCK_OPEN);
+			setState(96);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==T__4) {
+				{
+				{
+				{
+				setState(87);
+				dmg_hilo();
+				}
+				setState(91);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==NEWLINE) {
+					{
+					{
+					setState(88);
+					match(NEWLINE);
+					}
+					}
+					setState(93);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				}
+				}
+				setState(98);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(99);
+			match(BLOCK_CLOSE);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -423,7 +705,8 @@ public class GameMapParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TcContext extends ParserRuleContext {
-		public TerminalNode WORD() { return getToken(GameMapParser.WORD, 0); }
+		public TerminalNode BLOCK_OPEN() { return getToken(GameMapParser.BLOCK_OPEN, 0); }
+		public TerminalNode BLOCK_CLOSE() { return getToken(GameMapParser.BLOCK_CLOSE, 0); }
 		public TcContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -445,14 +728,18 @@ public class GameMapParser extends Parser {
 
 	public final TcContext tc() throws RecognitionException {
 		TcContext _localctx = new TcContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_tc);
+		enterRule(_localctx, 16, RULE_tc);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
-			match(T__2);
-			setState(54);
-			match(WORD);
+			{
+			setState(101);
+			match(T__6);
+			setState(102);
+			match(BLOCK_OPEN);
+			setState(103);
+			match(BLOCK_CLOSE);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -468,7 +755,8 @@ public class GameMapParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class WcContext extends ParserRuleContext {
-		public TerminalNode WORD() { return getToken(GameMapParser.WORD, 0); }
+		public TerminalNode BLOCK_OPEN() { return getToken(GameMapParser.BLOCK_OPEN, 0); }
+		public TerminalNode BLOCK_CLOSE() { return getToken(GameMapParser.BLOCK_CLOSE, 0); }
 		public WcContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -490,14 +778,18 @@ public class GameMapParser extends Parser {
 
 	public final WcContext wc() throws RecognitionException {
 		WcContext _localctx = new WcContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_wc);
+		enterRule(_localctx, 18, RULE_wc);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(56);
-			match(T__3);
-			setState(57);
-			match(WORD);
+			{
+			setState(105);
+			match(T__7);
+			setState(106);
+			match(BLOCK_OPEN);
+			setState(107);
+			match(BLOCK_CLOSE);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -512,44 +804,67 @@ public class GameMapParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\n<\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0010n\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
-		"\u0005\u0007\u0005\u0001\u0000\u0005\u0000\u000e\b\u0000\n\u0000\f\u0000"+
-		"\u0011\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0003\u0001\u0019\b\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0003\u0001 \b\u0001\u0001\u0001\u0005\u0001"+
-		"#\b\u0001\n\u0001\f\u0001&\t\u0001\u0005\u0001(\b\u0001\n\u0001\f\u0001"+
-		"+\t\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0000\u0000"+
-		"\u0006\u0000\u0002\u0004\u0006\b\n\u0000\u0001\u0002\u0000\u0005\u0005"+
-		"\u0007\u0007=\u0000\u000f\u0001\u0000\u0000\u0000\u0002\u0014\u0001\u0000"+
-		"\u0000\u0000\u0004/\u0001\u0000\u0000\u0000\u00062\u0001\u0000\u0000\u0000"+
-		"\b5\u0001\u0000\u0000\u0000\n8\u0001\u0000\u0000\u0000\f\u000e\u0003\u0002"+
-		"\u0001\u0000\r\f\u0001\u0000\u0000\u0000\u000e\u0011\u0001\u0000\u0000"+
-		"\u0000\u000f\r\u0001\u0000\u0000\u0000\u000f\u0010\u0001\u0000\u0000\u0000"+
-		"\u0010\u0012\u0001\u0000\u0000\u0000\u0011\u000f\u0001\u0000\u0000\u0000"+
-		"\u0012\u0013\u0005\u0000\u0000\u0001\u0013\u0001\u0001\u0000\u0000\u0000"+
-		"\u0014\u0015\u0005\u0006\u0000\u0000\u0015\u0016\u0005\b\u0000\u0000\u0016"+
-		"\u0018\u0005\t\u0000\u0000\u0017\u0019\u0007\u0000\u0000\u0000\u0018\u0017"+
-		"\u0001\u0000\u0000\u0000\u0018\u0019\u0001\u0000\u0000\u0000\u0019)\u0001"+
-		"\u0000\u0000\u0000\u001a \u0003\u0002\u0001\u0000\u001b \u0003\u0004\u0002"+
-		"\u0000\u001c \u0003\u0006\u0003\u0000\u001d \u0003\b\u0004\u0000\u001e"+
-		" \u0003\n\u0005\u0000\u001f\u001a\u0001\u0000\u0000\u0000\u001f\u001b"+
-		"\u0001\u0000\u0000\u0000\u001f\u001c\u0001\u0000\u0000\u0000\u001f\u001d"+
-		"\u0001\u0000\u0000\u0000\u001f\u001e\u0001\u0000\u0000\u0000 $\u0001\u0000"+
-		"\u0000\u0000!#\u0005\u0005\u0000\u0000\"!\u0001\u0000\u0000\u0000#&\u0001"+
-		"\u0000\u0000\u0000$\"\u0001\u0000\u0000\u0000$%\u0001\u0000\u0000\u0000"+
-		"%(\u0001\u0000\u0000\u0000&$\u0001\u0000\u0000\u0000\'\u001f\u0001\u0000"+
-		"\u0000\u0000(+\u0001\u0000\u0000\u0000)\'\u0001\u0000\u0000\u0000)*\u0001"+
-		"\u0000\u0000\u0000*,\u0001\u0000\u0000\u0000+)\u0001\u0000\u0000\u0000"+
-		",-\u0005\u0005\u0000\u0000-.\u0005\n\u0000\u0000.\u0003\u0001\u0000\u0000"+
-		"\u0000/0\u0005\u0001\u0000\u000001\u0005\u0006\u0000\u00001\u0005\u0001"+
-		"\u0000\u0000\u000023\u0005\u0002\u0000\u000034\u0005\u0006\u0000\u0000"+
-		"4\u0007\u0001\u0000\u0000\u000056\u0005\u0003\u0000\u000067\u0005\u0006"+
-		"\u0000\u00007\t\u0001\u0000\u0000\u000089\u0005\u0004\u0000\u00009:\u0005"+
-		"\u0006\u0000\u0000:\u000b\u0001\u0000\u0000\u0000\u0005\u000f\u0018\u001f"+
-		"$)";
+		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
+		"\b\u0007\b\u0002\t\u0007\t\u0001\u0000\u0005\u0000\u0016\b\u0000\n\u0000"+
+		"\f\u0000\u0019\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0003\u0001%\b\u0001\u0001\u0001\u0005\u0001(\b\u0001\n\u0001\f\u0001"+
+		"+\t\u0001\u0005\u0001-\b\u0001\n\u0001\f\u00010\t\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0001"+
+		"\u0003\u0001\u0003\u0001\u0003\u0003\u0003<\b\u0003\u0001\u0003\u0005"+
+		"\u0003?\b\u0003\n\u0003\f\u0003B\t\u0003\u0005\u0003D\b\u0003\n\u0003"+
+		"\f\u0003G\t\u0003\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001"+
+		"\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0005\u0007Z\b\u0007\n\u0007\f\u0007]\t\u0007\u0005\u0007_\b\u0007"+
+		"\n\u0007\f\u0007b\t\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0000\u0000\n\u0000"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0000\u0000o\u0000\u0017\u0001"+
+		"\u0000\u0000\u0000\u0002\u001c\u0001\u0000\u0000\u0000\u00043\u0001\u0000"+
+		"\u0000\u0000\u00066\u0001\u0000\u0000\u0000\bJ\u0001\u0000\u0000\u0000"+
+		"\nM\u0001\u0000\u0000\u0000\fP\u0001\u0000\u0000\u0000\u000eT\u0001\u0000"+
+		"\u0000\u0000\u0010e\u0001\u0000\u0000\u0000\u0012i\u0001\u0000\u0000\u0000"+
+		"\u0014\u0016\u0003\u0002\u0001\u0000\u0015\u0014\u0001\u0000\u0000\u0000"+
+		"\u0016\u0019\u0001\u0000\u0000\u0000\u0017\u0015\u0001\u0000\u0000\u0000"+
+		"\u0017\u0018\u0001\u0000\u0000\u0000\u0018\u001a\u0001\u0000\u0000\u0000"+
+		"\u0019\u0017\u0001\u0000\u0000\u0000\u001a\u001b\u0005\u0000\u0000\u0001"+
+		"\u001b\u0001\u0001\u0000\u0000\u0000\u001c\u001d\u0005\u0001\u0000\u0000"+
+		"\u001d\u001e\u0005\u000b\u0000\u0000\u001e.\u0005\u000f\u0000\u0000\u001f"+
+		"%\u0003\u0004\u0002\u0000 %\u0003\u0006\u0003\u0000!%\u0003\u000e\u0007"+
+		"\u0000\"%\u0003\u0010\b\u0000#%\u0003\u0012\t\u0000$\u001f\u0001\u0000"+
+		"\u0000\u0000$ \u0001\u0000\u0000\u0000$!\u0001\u0000\u0000\u0000$\"\u0001"+
+		"\u0000\u0000\u0000$#\u0001\u0000\u0000\u0000%)\u0001\u0000\u0000\u0000"+
+		"&(\u0005\t\u0000\u0000\'&\u0001\u0000\u0000\u0000(+\u0001\u0000\u0000"+
+		"\u0000)\'\u0001\u0000\u0000\u0000)*\u0001\u0000\u0000\u0000*-\u0001\u0000"+
+		"\u0000\u0000+)\u0001\u0000\u0000\u0000,$\u0001\u0000\u0000\u0000-0\u0001"+
+		"\u0000\u0000\u0000.,\u0001\u0000\u0000\u0000./\u0001\u0000\u0000\u0000"+
+		"/1\u0001\u0000\u0000\u00000.\u0001\u0000\u0000\u000012\u0005\u0010\u0000"+
+		"\u00002\u0003\u0001\u0000\u0000\u000034\u0005\u0002\u0000\u000045\u0005"+
+		"\u000b\u0000\u00005\u0005\u0001\u0000\u0000\u000067\u0005\u0003\u0000"+
+		"\u000078\u0005\u000b\u0000\u00008E\u0005\u000f\u0000\u00009<\u0003\b\u0004"+
+		"\u0000:<\u0003\n\u0005\u0000;9\u0001\u0000\u0000\u0000;:\u0001\u0000\u0000"+
+		"\u0000<@\u0001\u0000\u0000\u0000=?\u0005\t\u0000\u0000>=\u0001\u0000\u0000"+
+		"\u0000?B\u0001\u0000\u0000\u0000@>\u0001\u0000\u0000\u0000@A\u0001\u0000"+
+		"\u0000\u0000AD\u0001\u0000\u0000\u0000B@\u0001\u0000\u0000\u0000C;\u0001"+
+		"\u0000\u0000\u0000DG\u0001\u0000\u0000\u0000EC\u0001\u0000\u0000\u0000"+
+		"EF\u0001\u0000\u0000\u0000FH\u0001\u0000\u0000\u0000GE\u0001\u0000\u0000"+
+		"\u0000HI\u0005\u0010\u0000\u0000I\u0007\u0001\u0000\u0000\u0000JK\u0005"+
+		"\u0004\u0000\u0000KL\u0005\n\u0000\u0000L\t\u0001\u0000\u0000\u0000MN"+
+		"\u0005\u0005\u0000\u0000NO\u0005\n\u0000\u0000O\u000b\u0001\u0000\u0000"+
+		"\u0000PQ\u0005\u0005\u0000\u0000QR\u0005\n\u0000\u0000RS\u0005\n\u0000"+
+		"\u0000S\r\u0001\u0000\u0000\u0000TU\u0005\u0006\u0000\u0000UV\u0005\u000b"+
+		"\u0000\u0000V`\u0005\u000f\u0000\u0000W[\u0003\f\u0006\u0000XZ\u0005\t"+
+		"\u0000\u0000YX\u0001\u0000\u0000\u0000Z]\u0001\u0000\u0000\u0000[Y\u0001"+
+		"\u0000\u0000\u0000[\\\u0001\u0000\u0000\u0000\\_\u0001\u0000\u0000\u0000"+
+		"][\u0001\u0000\u0000\u0000^W\u0001\u0000\u0000\u0000_b\u0001\u0000\u0000"+
+		"\u0000`^\u0001\u0000\u0000\u0000`a\u0001\u0000\u0000\u0000ac\u0001\u0000"+
+		"\u0000\u0000b`\u0001\u0000\u0000\u0000cd\u0005\u0010\u0000\u0000d\u000f"+
+		"\u0001\u0000\u0000\u0000ef\u0005\u0007\u0000\u0000fg\u0005\u000f\u0000"+
+		"\u0000gh\u0005\u0010\u0000\u0000h\u0011\u0001\u0000\u0000\u0000ij\u0005"+
+		"\b\u0000\u0000jk\u0005\u000f\u0000\u0000kl\u0005\u0010\u0000\u0000l\u0013"+
+		"\u0001\u0000\u0000\u0000\t\u0017$).;@E[`";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

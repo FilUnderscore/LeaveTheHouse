@@ -22,4 +22,70 @@ public interface PlayerCommandVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCommand(PlayerCommandParser.CommandContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#door}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDoor(PlayerCommandParser.DoorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#pickup}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPickup(PlayerCommandParser.PickupContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#exit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExit(PlayerCommandParser.ExitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#describe}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribe(PlayerCommandParser.DescribeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#admire}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdmire(PlayerCommandParser.AdmireContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#eat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEat(PlayerCommandParser.EatContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#stats}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStats(PlayerCommandParser.StatsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#wield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWield(PlayerCommandParser.WieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#open}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpen(PlayerCommandParser.OpenContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#attack}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttack(PlayerCommandParser.AttackContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#help}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHelp(PlayerCommandParser.HelpContext ctx);
 }
