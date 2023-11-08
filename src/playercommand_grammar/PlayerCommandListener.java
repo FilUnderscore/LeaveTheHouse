@@ -118,6 +118,16 @@ public interface PlayerCommandListener extends ParseTreeListener {
 	 */
 	void exitOpen(PlayerCommandParser.OpenContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PlayerCommandParser#combine}.
+	 * @param ctx the parse tree
+	 */
+	void enterCombine(PlayerCommandParser.CombineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PlayerCommandParser#combine}.
+	 * @param ctx the parse tree
+	 */
+	void exitCombine(PlayerCommandParser.CombineContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PlayerCommandParser#attack}.
 	 * @param ctx the parse tree
 	 */

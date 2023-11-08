@@ -1,5 +1,7 @@
 package gameplay;
 
+import consumable.Food;
+
 public class Player extends Character
 {
     private Inventory inventory;
@@ -11,6 +13,10 @@ public class Player extends Character
         super(name, health);
         this.confidence = confidence;
         this.inventory = new Inventory();
+    }
+
+    public int getConfidence() {
+        return this.confidence;
     }
 
     @Override
@@ -39,5 +45,21 @@ public class Player extends Character
         } else {
             return false;
         }
+    }
+
+    public boolean consume(Food food) {
+        if(food.isConsumed())
+            return false;
+
+        this.setHp(Math.min(this.getHp() + food.getHp(), 100));
+        food.consume();
+
+        this.inventory.remove(food);
+
+        return true;
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
     }
 }

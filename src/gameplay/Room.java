@@ -6,7 +6,7 @@ import java.util.List;
 public class Room extends Entity{
     private boolean finalRoom;
 
-    private Inventory pickupsInRoom;
+    private final Inventory pickupsInRoom;
     private Room[] connectingRooms;
 
     public Room(String description, Inventory pickupsInRoom, Room[] connectingRooms) {
@@ -40,5 +40,13 @@ public class Room extends Entity{
         }
 
         return null;
+    }
+
+    public void setFinalRoom(boolean finalRoom) {
+        this.finalRoom = finalRoom;
+    }
+
+    public boolean isFinalRoom() {
+        return this.finalRoom;
     }
 }

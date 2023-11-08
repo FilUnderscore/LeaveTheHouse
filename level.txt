@@ -1,13 +1,72 @@
 ROOM basement {
     DOOR sewer
-    ITEM axe {
-        dmg 10 20
-    }
+
+    ITEM axe
 }
 
 ROOM sewer {
     DOOR basement
+    DOOR bathroom
+
     MONSTER zombie {
+        hp 20
+    }
+}
+
+ROOM bathroom {
+    DOOR sewer
+    DOOR hallway
+
+    ITEM bread
+}
+
+ROOM hallway {
+    DOOR bathroom
+    DOOR basement
+    DOOR kitchen
+    DOOR dining
+    DOOR garage
+    DOOR foyer
+}
+
+ROOM kitchen {
+    DOOR hallway
+    DOOR dining
+
+    ITEM roastboar
+
+    MONSTER ogre {
+        hp 100
+    }
+}
+
+ROOM dining {
+    DOOR hallway
+    DOOR kitchen
+
+    ITEM mead
+}
+
+ROOM garage {
+    DOOR hallway
+
+    ITEM sword
+
+    MONSTER zombie {
+        hp 50
+    }
+}
+
+ROOM foyer {
+    DOOR porch
+
+    MONSTER ogre {
         hp 200
+    }
+}
+
+ROOM porch {
+    MONSTER dragon {
+        hp 400
     }
 }

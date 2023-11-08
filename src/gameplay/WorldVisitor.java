@@ -1,8 +1,14 @@
 package gameplay;
 
+import consumable.food.Bread;
+import consumable.food.Mead;
+import consumable.food.RoastBoar;
 import gamemap_grammar.GameMapBaseVisitor;
 import gamemap_grammar.GameMapParser;
+import wieldables.Axe;
+import wieldables.Sword;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,14 +28,22 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         }
     }
 
-    private final class ItemVisit implements Visit {
-        private final String name;
-        private final int dmgLo, dmgHi;
+    private static Map<String, Class<? extends Pickup>> ITEM_MAP = new HashMap<>() {{
+        // Wieldables
+        put("axe", Axe.class);
+        put("sword", Sword.class);
 
-        public ItemVisit(String name, int dmgLo, int dmgHi) {
-            this.name = name;
-            this.dmgLo = dmgLo;
-            this.dmgHi = dmgHi;
+        // Food
+        put("mead", Mead.class);
+        put("roastboar", RoastBoar.class);
+        put("bread", Bread.class);
+    }};
+
+    private final class ItemVisit implements Visit {
+        private final String itemName;
+
+        public ItemVisit(String itemName) {
+            this.itemName = itemName;
         }
     }
 
@@ -41,12 +55,6 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         public RoomVisit(String roomName) {
             this.roomName = roomName;
         }
-
-        public void addDoor(DoorVisit door) {
-            this.doors.add(door);
-        }
-
-        public void addItem(ItemVisit item) { this.items.add(item); }
     }
 
     public WorldVisitor()
@@ -73,12 +81,12 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
 
         for(GameMapParser.DoorContext connectingRoom : connectingRoomsCtx) {
             DoorVisit door = (DoorVisit) this.visit(connectingRoom);
-            roomVisit.addDoor(door);
+            roomVisit.doors.add(door);
         }
 
         for(GameMapParser.ItemContext itemCtx : itemsCtx) {
             ItemVisit item = (ItemVisit) this.visit(itemCtx);
-            roomVisit.addItem(item);
+            roomVisit.items.add(item);
         }
 
         return roomVisit;
@@ -108,7 +116,12 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
             roomMap.put(roomVisit.roomName, room);
 
             for(ItemVisit visit : roomVisit.items) {
-                room.getPickupsInRoom().add(new Wieldable(visit.name, visit.dmgLo, visit.dmgHi));
+                try {
+                    room.getPickupsInRoom().add(ITEM_MAP.get(visit.itemName).getConstructor().newInstance());
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                         InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 
@@ -132,12 +145,7 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
     @Override
     public Visit visitItem(GameMapParser.ItemContext ctx) {
         String itemName = ctx.WORD().getText();
-        GameMapParser.Dmg_hiloContext itemDmgHiLo = ctx.dmg_hilo(0);
-
-        int itemDmgLo = Integer.parseInt(itemDmgHiLo.INT(0).getText());
-        int itemDmgHi = Integer.parseInt(itemDmgHiLo.INT(1).getText());
-
-        return new ItemVisit(itemName, itemDmgLo, itemDmgHi);
+        return new ItemVisit(itemName);
     }
 
     @Override

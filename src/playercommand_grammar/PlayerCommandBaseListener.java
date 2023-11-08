@@ -149,6 +149,18 @@ public class PlayerCommandBaseListener implements PlayerCommandListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCombine(PlayerCommandParser.CombineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCombine(PlayerCommandParser.CombineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAttack(PlayerCommandParser.AttackContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -77,6 +77,12 @@ public interface PlayerCommandVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOpen(PlayerCommandParser.OpenContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#combine}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCombine(PlayerCommandParser.CombineContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PlayerCommandParser#attack}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

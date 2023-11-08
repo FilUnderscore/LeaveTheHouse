@@ -14,7 +14,7 @@ hp: 'hp' INT;
 dmg: 'dmg' INT;
 dmg_hilo: 'dmg' INT INT;
 
-item: ('ITEM' WORD BLOCK_OPEN ((dmg_hilo) NEWLINE*)* BLOCK_CLOSE);
+item: ('ITEM' WORD);
 tc: ('TC' BLOCK_OPEN BLOCK_CLOSE);
 wc: ('WC' BLOCK_OPEN BLOCK_CLOSE);
 
