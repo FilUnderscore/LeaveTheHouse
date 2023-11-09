@@ -59,6 +59,18 @@ public interface GameMapVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProb(GameMapParser.ProbContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GameMapParser#locked}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocked(GameMapParser.LockedContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GameMapParser#final}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFinal(GameMapParser.FinalContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GameMapParser#item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

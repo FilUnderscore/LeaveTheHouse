@@ -21,6 +21,7 @@ public class HelpCommand implements PlayerCommand {
                     - wield <weapon> : Player wields weapon from inventory for battle.
                     - wield fistsoffury : Player wields fists of fury (does not appear in inventory).
                     - open <chest> : Opens a treasure or war chest in the inventory. The contents of the chest is placed in the player's inventory and the chest removed.
+                    - combine <item> <item> : Combines two items to form a new item.
                     - help : Displays commands in this mode.
                     """);
         } else if(world.getMode() == PlayMode.BATTLE) {

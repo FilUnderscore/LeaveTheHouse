@@ -56,7 +56,17 @@ public class World implements WorldVisitor.Visit {
             } else {
                 out("Unknown command '%s', type 'help' for the list of commands available.", input);
             }
+
+            if(player.getHp() <= 0) {
+                out("Game over, you died.");
+                gameInProgress = false;
+            } else if (currentRoom != null && currentRoom.isFinalRoom()) {
+                out("You won, congratulations!");
+                gameInProgress = false;
+            }
         }
+
+        scanner.close();
     }
 
     public void out(String format, Object...args) {

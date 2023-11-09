@@ -6,11 +6,15 @@ import consumable.food.RoastBoar;
 import consumable.valuable.*;
 import gamemap_grammar.GameMapBaseVisitor;
 import gamemap_grammar.GameMapParser;
-import monsters.Dragon;
-import monsters.Monster;
-import monsters.Ogre;
-import monsters.Zombie;
+import monsters.*;
+import openable.Openable;
+import openable.TreasureChest;
+import openable.WarChest;
+import opener.Key;
+import opener.LockPick;
 import wieldables.Axe;
+import wieldables.Katana;
+import wieldables.Stick;
 import wieldables.Sword;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,6 +41,8 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         // Wieldables
         put("axe", Axe.class);
         put("sword", Sword.class);
+        put("katana", Katana.class);
+        put("stick", Stick.class);
 
         // Food
         put("mead", Mead.class);
@@ -51,12 +57,18 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         put("goldbars", GoldBars.class);
         put("jewel", Jewel.class);
         put("mobile", Mobile.class);
+
+        // Openers
+        put("key", Key.class);
+        put("lockpick", LockPick.class);
     }};
 
     private static Map<String, Class<? extends Monster>> MONSTER_MAP = new HashMap<>() {{
        put("zombie", Zombie.class);
        put("ogre", Ogre.class);
        put("dragon", Dragon.class);
+       put("dingo", Dingo.class);
+       put("ghost", Ghost.class);
     }};
 
     private static final class ItemVisit implements Visit {
@@ -64,6 +76,22 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
 
         public ItemVisit(String itemName) {
             this.itemName = itemName;
+        }
+    }
+
+    private static final class ChestVisit implements Visit {
+        public enum ChestType {
+            WarChest,
+            TreasureChest;
+        }
+
+        private final ChestType type;
+        private final boolean locked;
+        private List<ItemVisit> items = new ArrayList<>();
+
+        public ChestVisit(ChestType type, boolean locked) {
+            this.type = type;
+            this.locked = locked;
         }
     }
 
@@ -84,6 +112,9 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         private final List<DoorVisit> doors = new ArrayList<>();
         private final List<ItemVisit> items = new ArrayList<>();
         private final List<MonsterVisit> monsters = new ArrayList<>();
+        private final List<ChestVisit> chests = new ArrayList<>();
+
+        private boolean isFinal = false;
 
         public RoomVisit(String roomName) {
             this.roomName = roomName;
@@ -109,8 +140,8 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         List<GameMapParser.DoorContext> connectingRoomsCtx = ctx.door();
         List<GameMapParser.MonsterContext> monstersCtx = ctx.monster();
         List<GameMapParser.ItemContext> itemsCtx = ctx.item();
-        List<GameMapParser.TcContext> tcCtx = ctx.tc();
-        List<GameMapParser.WcContext> wcCtx = ctx.wc();
+        List<GameMapParser.TcContext> tcsCtx = ctx.tc();
+        List<GameMapParser.WcContext> wcsCtx = ctx.wc();
 
         for(GameMapParser.DoorContext connectingRoom : connectingRoomsCtx) {
             DoorVisit door = (DoorVisit) this.visit(connectingRoom);
@@ -126,6 +157,18 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
             MonsterVisit monster = (MonsterVisit) this.visit(monsterCtx);
             roomVisit.monsters.add(monster);
         }
+
+        for(GameMapParser.TcContext tcCtx : tcsCtx) {
+            ChestVisit chest = (ChestVisit) this.visit(tcCtx);
+            roomVisit.chests.add(chest);
+        }
+
+        for(GameMapParser.WcContext wcCtx : wcsCtx) {
+            ChestVisit chest = (ChestVisit) this.visit(wcCtx);
+            roomVisit.chests.add(chest);
+        }
+
+        roomVisit.isFinal = ctx.final_() != null && !ctx.final_().isEmpty();
 
         return roomVisit;
     }
@@ -175,6 +218,34 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
             }
 
             room.setMonsters(monsters);
+
+            for(ChestVisit visit : roomVisit.chests) {
+                Openable openable = null;
+
+                switch(visit.type) {
+                    case WarChest:
+                        openable = new WarChest(visit.locked);
+                        break;
+                    case TreasureChest:
+                        openable = new TreasureChest(visit.locked);
+                        break;
+                    default:
+                        continue;
+                }
+
+                for(ItemVisit item : visit.items) {
+                    try {
+                        openable.getContents().add(ITEM_MAP.get(item.itemName).getConstructor().newInstance());
+                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                             InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                room.getPickupsInRoom().add(openable);
+            }
+
+            room.setFinalRoom(roomVisit.isFinal);
         }
 
         // Resolve rooms
@@ -212,11 +283,27 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
 
     @Override
     public Visit visitTc(GameMapParser.TcContext ctx) {
-        return super.visitTc(ctx);
+        boolean locked = ctx.locked() != null && !ctx.locked().isEmpty();
+        ChestVisit chest = new ChestVisit(ChestVisit.ChestType.TreasureChest, locked);
+
+        for(GameMapParser.ItemContext itemCtx : ctx.item()) {
+            ItemVisit item = (ItemVisit) this.visit(itemCtx);
+            chest.items.add(item);
+        }
+
+        return chest;
     }
 
     @Override
     public Visit visitWc(GameMapParser.WcContext ctx) {
-        return super.visitWc(ctx);
+        boolean locked = ctx.locked() != null && !ctx.locked().isEmpty();
+        ChestVisit chest = new ChestVisit(ChestVisit.ChestType.WarChest, locked);
+
+        for(GameMapParser.ItemContext itemCtx : ctx.item()) {
+            ItemVisit item = (ItemVisit) this.visit(itemCtx);
+            chest.items.add(item);
+        }
+
+        return chest;
     }
 }

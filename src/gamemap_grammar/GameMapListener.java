@@ -88,6 +88,26 @@ public interface GameMapListener extends ParseTreeListener {
 	 */
 	void exitProb(GameMapParser.ProbContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GameMapParser#locked}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocked(GameMapParser.LockedContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#locked}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocked(GameMapParser.LockedContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GameMapParser#final}.
+	 * @param ctx the parse tree
+	 */
+	void enterFinal(GameMapParser.FinalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#final}.
+	 * @param ctx the parse tree
+	 */
+	void exitFinal(GameMapParser.FinalContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GameMapParser#item}.
 	 * @param ctx the parse tree
 	 */

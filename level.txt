@@ -33,6 +33,11 @@ ROOM hallway {
     DOOR foyer
 
     ITEM coin
+
+    TC {
+        ITEM jewel
+        locked
+    }
 }
 
 ROOM kitchen {
@@ -57,6 +62,7 @@ ROOM dining {
     ITEM mead
 
     ITEM chalice
+    ITEM key
 }
 
 ROOM garage {
@@ -70,26 +76,39 @@ ROOM garage {
         prob 50
     }
 
-    ITEM goldbars
-    ITEM jewel
+    ITEM key
+
+    WC {
+        ITEM goldbars
+        locked
+    }
 }
 
 ROOM foyer {
     DOOR porch
+    DOOR hallway
 
     MONSTER ogre {
-        hp 200
+        hp 100
         dmg 10
         prob 70
     }
 
     ITEM mobile
+    ITEM lockpick
 }
 
 ROOM porch {
     MONSTER dragon {
-        hp 400
+        hp 150
         dmg 20
         prob 100
     }
+
+    DOOR outside
+    DOOR foyer
+}
+
+ROOM outside {
+    final
 }

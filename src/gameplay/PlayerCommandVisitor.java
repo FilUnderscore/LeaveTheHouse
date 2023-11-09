@@ -63,4 +63,10 @@ public class PlayerCommandVisitor extends PlayerCommandBaseVisitor<PlayerCommand
         String valuableName = ctx.WORD().getText();
         return new AdmireCommand(valuableName);
     }
+
+    @Override
+    public PlayerCommand visitOpen(PlayerCommandParser.OpenContext ctx) {
+        String chestName = ctx.WORD().getText();
+        return new OpenCommand(chestName);
+    }
 }

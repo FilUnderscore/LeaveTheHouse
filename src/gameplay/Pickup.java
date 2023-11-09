@@ -8,6 +8,8 @@ import consumable.valuable.HoneyBag;
 import consumable.valuable.Jewel;
 import consumable.valuable.Ring;
 import wieldables.Axe;
+import wieldables.Katana;
+import wieldables.Stick;
 import wieldables.Sword;
 
 import java.util.ArrayList;
@@ -27,9 +29,13 @@ public abstract class Pickup<T> extends Entity
         }
     }
 
+    // List of combinations.
     private static final List<Combination> COMBINATIONS = new ArrayList<>() {{
         // Weapons
         add(new Combination(Axe.class, Sword.class, "longhandledaxe", "Long-Handled Axe"));
+        add(new Combination(Katana.class, Sword.class, "doublebladedkatana", "Double-bladed Katana"));
+        add(new Combination(Stick.class, Sword.class, "longsword", "Longsword"));
+        add(new Combination(Stick.class, Katana.class, "longkatana", "Long-Katana"));
 
         // Valuables
         add(new Combination(HoneyBag.class, Chalice.class, "honeycoatedchalice", "Honey-coated Chalice"));
