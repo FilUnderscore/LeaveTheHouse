@@ -53,6 +53,12 @@ public interface GameMapVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDmg_hilo(GameMapParser.Dmg_hiloContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GameMapParser#prob}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProb(GameMapParser.ProbContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GameMapParser#item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

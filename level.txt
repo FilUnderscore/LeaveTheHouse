@@ -10,7 +10,11 @@ ROOM sewer {
 
     MONSTER zombie {
         hp 20
+        dmg 5
+        prob 100
     }
+
+    ITEM ring
 }
 
 ROOM bathroom {
@@ -27,6 +31,8 @@ ROOM hallway {
     DOOR dining
     DOOR garage
     DOOR foyer
+
+    ITEM coin
 }
 
 ROOM kitchen {
@@ -37,7 +43,11 @@ ROOM kitchen {
 
     MONSTER ogre {
         hp 100
+        dmg 10
+        prob 100
     }
+
+    ITEM honeybag
 }
 
 ROOM dining {
@@ -45,6 +55,8 @@ ROOM dining {
     DOOR kitchen
 
     ITEM mead
+
+    ITEM chalice
 }
 
 ROOM garage {
@@ -54,7 +66,12 @@ ROOM garage {
 
     MONSTER zombie {
         hp 50
+        dmg 15
+        prob 50
     }
+
+    ITEM goldbars
+    ITEM jewel
 }
 
 ROOM foyer {
@@ -62,11 +79,17 @@ ROOM foyer {
 
     MONSTER ogre {
         hp 200
+        dmg 10
+        prob 70
     }
+
+    ITEM mobile
 }
 
 ROOM porch {
     MONSTER dragon {
         hp 400
+        dmg 20
+        prob 100
     }
 }

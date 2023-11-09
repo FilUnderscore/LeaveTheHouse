@@ -8,11 +8,12 @@ gamemap : room* EOF;
 room: ('ROOM' WORD BLOCK_OPEN ((door | monster | item | tc | wc) NEWLINE*)* BLOCK_CLOSE);
 
 door: ('DOOR' WORD);
-monster: ('MONSTER' WORD BLOCK_OPEN ((hp | dmg) NEWLINE*)* BLOCK_CLOSE);
+monster: ('MONSTER' WORD BLOCK_OPEN ((hp | dmg | prob) NEWLINE*)* BLOCK_CLOSE);
 
 hp: 'hp' INT;
 dmg: 'dmg' INT;
 dmg_hilo: 'dmg' INT INT;
+prob: 'prob' INT;
 
 item: ('ITEM' WORD);
 tc: ('TC' BLOCK_OPEN BLOCK_CLOSE);

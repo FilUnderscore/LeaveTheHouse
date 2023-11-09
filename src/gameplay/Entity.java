@@ -3,11 +3,16 @@ package gameplay;
 import java.util.Random;
 
 public abstract class Entity {
-    private String id;
-    private String description;
+    private final String id, description;
 
     public Entity(String description) {
         this.id = this.getClass().getSimpleName();
+        this.description = description;
+    }
+
+    // Required for customization.
+    protected Entity(String id, String description) {
+        this.id = id;
         this.description = description;
     }
 

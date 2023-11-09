@@ -20,7 +20,7 @@ public class StatsCommand implements PlayerCommand {
                 player.getHp(),
                 player.getConfidence(),
                 player.getInventory().getItems().length,
-                StringUtil.list((item) -> "- " + item.getDescription(), player.getInventory().getItems()));
+                StringUtil.list((item) -> "- " + item.getDescription() + " (" + item.toString() + ")", player.getInventory().getItems()));
     }
 
     @Override

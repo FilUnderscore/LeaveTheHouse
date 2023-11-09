@@ -78,6 +78,16 @@ public interface GameMapListener extends ParseTreeListener {
 	 */
 	void exitDmg_hilo(GameMapParser.Dmg_hiloContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GameMapParser#prob}.
+	 * @param ctx the parse tree
+	 */
+	void enterProb(GameMapParser.ProbContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GameMapParser#prob}.
+	 * @param ctx the parse tree
+	 */
+	void exitProb(GameMapParser.ProbContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GameMapParser#item}.
 	 * @param ctx the parse tree
 	 */

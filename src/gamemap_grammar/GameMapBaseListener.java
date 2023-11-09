@@ -101,6 +101,18 @@ public class GameMapBaseListener implements GameMapListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterProb(GameMapParser.ProbContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProb(GameMapParser.ProbContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterItem(GameMapParser.ItemContext ctx) { }
 	/**
 	 * {@inheritDoc}

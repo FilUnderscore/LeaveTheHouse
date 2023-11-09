@@ -3,8 +3,13 @@ package gameplay;
 import consumable.food.Bread;
 import consumable.food.Mead;
 import consumable.food.RoastBoar;
+import consumable.valuable.*;
 import gamemap_grammar.GameMapBaseVisitor;
 import gamemap_grammar.GameMapParser;
+import monsters.Dragon;
+import monsters.Monster;
+import monsters.Ogre;
+import monsters.Zombie;
 import wieldables.Axe;
 import wieldables.Sword;
 
@@ -19,7 +24,7 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
 
     }
 
-    private final class DoorVisit implements Visit
+    private static final class DoorVisit implements Visit
     {
         private final String targetRoom;
 
@@ -37,9 +42,24 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         put("mead", Mead.class);
         put("roastboar", RoastBoar.class);
         put("bread", Bread.class);
+
+        // Valuables
+        put("honeybag", HoneyBag.class);
+        put("ring", Ring.class);
+        put("chalice", Chalice.class);
+        put("coin", Coin.class);
+        put("goldbars", GoldBars.class);
+        put("jewel", Jewel.class);
+        put("mobile", Mobile.class);
     }};
 
-    private final class ItemVisit implements Visit {
+    private static Map<String, Class<? extends Monster>> MONSTER_MAP = new HashMap<>() {{
+       put("zombie", Zombie.class);
+       put("ogre", Ogre.class);
+       put("dragon", Dragon.class);
+    }};
+
+    private static final class ItemVisit implements Visit {
         private final String itemName;
 
         public ItemVisit(String itemName) {
@@ -47,10 +67,23 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         }
     }
 
+    private static final class MonsterVisit implements Visit {
+        private final String monsterName;
+        private final int hp, dmg, probability;
+
+        public MonsterVisit(String monsterName, int hp, int dmg, int probability) {
+            this.monsterName = monsterName;
+            this.hp = hp;
+            this.dmg = dmg;
+            this.probability = probability;
+        }
+    }
+
     private final class RoomVisit implements Visit {
         private final String roomName;
         private final List<DoorVisit> doors = new ArrayList<>();
         private final List<ItemVisit> items = new ArrayList<>();
+        private final List<MonsterVisit> monsters = new ArrayList<>();
 
         public RoomVisit(String roomName) {
             this.roomName = roomName;
@@ -89,6 +122,11 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
             roomVisit.items.add(item);
         }
 
+        for(GameMapParser.MonsterContext monsterCtx : monstersCtx) {
+            MonsterVisit monster = (MonsterVisit) this.visit(monsterCtx);
+            roomVisit.monsters.add(monster);
+        }
+
         return roomVisit;
     }
 
@@ -123,6 +161,20 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
                     throw new RuntimeException(e);
                 }
             }
+
+            Monster[] monsters = new Monster[roomVisit.monsters.size()];
+
+            int i = 0;
+            for(MonsterVisit visit : roomVisit.monsters) {
+                try {
+                    monsters[i++] = MONSTER_MAP.get(visit.monsterName).getConstructor(int.class, int.class, int.class).newInstance(visit.hp, visit.dmg, visit.probability);
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                         InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            room.setMonsters(monsters);
         }
 
         // Resolve rooms
@@ -150,7 +202,12 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
 
     @Override
     public Visit visitMonster(GameMapParser.MonsterContext ctx) {
-        return super.visitMonster(ctx);
+        String monsterName = ctx.WORD().getText();
+        int hp = Integer.parseInt(ctx.hp(0).INT().getText());
+        int dmg = Integer.parseInt(ctx.dmg(0).INT().getText());
+        int prob = Integer.parseInt(ctx.prob(0).INT().getText());
+
+        return new MonsterVisit(monsterName, hp, dmg, prob);
     }
 
     @Override

@@ -38,4 +38,29 @@ public class PlayerCommandVisitor extends PlayerCommandBaseVisitor<PlayerCommand
         String foodName = ctx.WORD().getText();
         return new EatCommand(foodName);
     }
+
+    @Override
+    public PlayerCommand visitCombine(PlayerCommandParser.CombineContext ctx) {
+        String itemNameOne = ctx.WORD(0).getText();
+        String itemNameTwo = ctx.WORD(1).getText();
+
+        return new CombineCommand(itemNameOne, itemNameTwo);
+    }
+
+    @Override
+    public PlayerCommand visitAttack(PlayerCommandParser.AttackContext ctx) {
+        return new AttackCommand();
+    }
+
+    @Override
+    public PlayerCommand visitWield(PlayerCommandParser.WieldContext ctx) {
+        String weaponName = ctx.WORD().getText();
+        return new WieldCommand(weaponName);
+    }
+
+    @Override
+    public PlayerCommand visitAdmire(PlayerCommandParser.AdmireContext ctx) {
+        String valuableName = ctx.WORD().getText();
+        return new AdmireCommand(valuableName);
+    }
 }

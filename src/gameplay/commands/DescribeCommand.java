@@ -20,7 +20,7 @@ public final class DescribeCommand implements PlayerCommand {
                 """,
                 room.getDescription(),
                 pickups.getItems().length,
-                StringUtil.list((i) -> "- " + i.getDescription(), pickups.getItems()),
+                StringUtil.list((i) -> "- " + i.getDescription() + " (" + i.toString() + ")", pickups.getItems()),
                 connectingRooms.length,
                 StringUtil.list((r) -> "- " + r.getDescription(), connectingRooms));
     }

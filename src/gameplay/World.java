@@ -2,6 +2,7 @@
 package gameplay;
 
 import gamemap_grammar.GameMapBaseVisitor;
+import monsters.Monster;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -58,7 +59,7 @@ public class World implements WorldVisitor.Visit {
         }
     }
 
-    private void out(String format, Object...args) {
+    public void out(String format, Object...args) {
         System.out.printf((format) + "%n", args);
     }
 
@@ -77,6 +78,25 @@ public class World implements WorldVisitor.Visit {
 
     private void onEnterRoom() {
         out("You entered the room %s.", this.currentRoom.getDescription());
+
+        if(this.currentRoom.getMonsters() != null && this.currentRoom.getMonsters().length > 0) {
+            boolean appear = false;
+
+            for(Monster monster : this.currentRoom.getMonsters()) {
+                if(monster.appear()) {
+                    appear = true;
+                    out("A %s ambushed you, blocking your path. You have no choice but to stand your ground.", monster.getDescription());
+                }
+            }
+
+            if(appear)
+                this.mode = PlayMode.BATTLE;
+        }
+    }
+
+    public void notifyMonstersKilled() {
+        out("You clear the room of monsters that once roamed from within.");
+        this.mode = PlayMode.EXPLORE;
     }
 
     //--------------------------------------------------------

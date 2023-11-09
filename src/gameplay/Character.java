@@ -10,13 +10,13 @@ public abstract class Character extends Entity {
     }
 
     protected void setHp(int hp) {
-        this.hp = hp;
+        this.hp = Math.min(Math.max(0, hp), 100);
     }
 
     public int getHp() {
         return this.hp;
     }
 
-    protected abstract int dealAttackDamage();
+    public abstract int dealAttackDamage();
     public abstract int defendAttack(Character enemy);
 }

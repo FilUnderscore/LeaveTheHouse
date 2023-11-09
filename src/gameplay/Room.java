@@ -1,5 +1,7 @@
 package gameplay;
 
+import monsters.Monster;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ public class Room extends Entity{
 
     private final Inventory pickupsInRoom;
     private Room[] connectingRooms;
+    private Monster[] monsters;
 
     public Room(String description, Inventory pickupsInRoom, Room[] connectingRooms) {
         super(description);
@@ -48,5 +51,13 @@ public class Room extends Entity{
 
     public boolean isFinalRoom() {
         return this.finalRoom;
+    }
+
+    public void setMonsters(Monster[] monsters) {
+        this.monsters = monsters;
+    }
+
+    public Monster[] getMonsters() {
+        return monsters;
     }
 }

@@ -1,6 +1,9 @@
 package gameplay;
 
 import consumable.Food;
+import consumable.Valuable;
+import wieldables.FistsOfFury;
+import wieldables.Wieldable;
 
 public class Player extends Character
 {
@@ -20,7 +23,7 @@ public class Player extends Character
     }
 
     @Override
-    protected int dealAttackDamage() {
+    public int dealAttackDamage() {
         int h = this.weapon.hit();
         int c = this.confidence;
 
@@ -30,7 +33,7 @@ public class Player extends Character
     @Override
     public int defendAttack(Character enemy) {
         int d = enemy.dealAttackDamage();
-        this.setHp(Math.max(this.getHp() - d, 0));
+        this.setHp(this.getHp() - d);
         this.confidence = Math.max(this.confidence - d / 2, 0);
 
         return d;
@@ -42,6 +45,14 @@ public class Player extends Character
         if(pickup instanceof Wieldable) {
             this.weapon = (Wieldable) pickup;
             return true;
+        } else if(pickup == null) {
+            if(weapon.equalsIgnoreCase("fistsoffury"))
+            {
+                this.weapon = new FistsOfFury();
+                return true;
+            }
+
+            return false;
         } else {
             return false;
         }
@@ -51,12 +62,30 @@ public class Player extends Character
         if(food.isConsumed())
             return false;
 
-        this.setHp(Math.min(this.getHp() + food.getHp(), 100));
+        this.setHp(this.getHp() + food.getHp());
         food.consume();
 
         this.inventory.remove(food);
 
         return true;
+    }
+
+    public boolean admire(Valuable valuable) {
+        if(valuable.isConsumed())
+            return false;
+
+        this.setConfidence(this.getConfidence() + valuable.getValue());
+        valuable.consume();
+
+        return true;
+    }
+
+    private void setConfidence(int confidence) {
+        this.confidence = Math.min(Math.max(confidence, 0), 100);
+    }
+
+    public Wieldable getWeapon() {
+        return this.weapon;
     }
 
     public Inventory getInventory() {
