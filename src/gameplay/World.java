@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import playercommand_grammar.PlayerCommandBaseVisitor;
 import playercommand_grammar.PlayerCommandLexer;
 import playercommand_grammar.PlayerCommandParser;
+import util.StringUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -97,6 +98,16 @@ public class World implements WorldVisitor.Visit {
 
     private void onEnterRoom() {
         out("You entered the room %s.", this.currentRoom.getDescription());
+        out("""
+            The room has %d item(s) scattered across the room:
+            %s
+            The room has %d door(s), each distinctly labelled:
+            %s
+            """,
+            this.currentRoom.getPickupsInRoom().getItems().length,
+            StringUtil.list((i) -> "- " + i.getDescription() + " (" + i.toString() + ")", this.currentRoom.getPickupsInRoom().getItems()),
+            this.currentRoom.getConnectingRooms().length,
+            StringUtil.list((r) -> "- " + r.getDescription(), this.currentRoom.getConnectingRooms()));
 
         if(this.currentRoom.getMonsters() != null && this.currentRoom.getMonsters().length > 0) {
             boolean appear = false;
