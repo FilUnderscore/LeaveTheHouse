@@ -69,4 +69,14 @@ public class PlayerCommandVisitor extends PlayerCommandBaseVisitor<PlayerCommand
         String chestName = ctx.WORD().getText();
         return new OpenCommand(chestName);
     }
+
+    @Override
+    public PlayerCommand visitRepair(PlayerCommandParser.RepairContext ctx) {
+        return new RepairCommand();
+    }
+
+    @Override
+    public PlayerCommand visitExit(PlayerCommandParser.ExitContext ctx) {
+        return new ExitCommand();
+    }
 }

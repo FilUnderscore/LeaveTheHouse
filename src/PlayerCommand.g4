@@ -4,7 +4,7 @@ grammar PlayerCommand;
 
 
 input: command NEWLINE;
-command: (door | pickup | exit | describe | admire | eat | stats | wield | open | combine | attack | help);
+command: (door | pickup | exit | describe | admire | eat | stats | wield | open | combine | repair | attack | help);
 
 // Explore-mode commands
 door: 'door' WORD;
@@ -17,6 +17,7 @@ stats: 'stats';
 wield: 'wield' WORD;
 open: 'open' WORD;
 combine: 'combine' WORD WORD;
+repair: 'repair';
 
 // Battle-mode commands
 attack: 'attack';

@@ -1,4 +1,4 @@
-// Generated from E:/Downloads/Start_TextGameEngine/TextGameEngine/src/PlayerCommand.g4 by ANTLR 4.13.1
+// Generated from C:/Users/filje/Desktop/TextGameEngine/src/PlayerCommand.g4 by ANTLR 4.13.1
 package playercommand_grammar;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -96,6 +96,13 @@ public class PlayerCommandBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitCombine(PlayerCommandParser.CombineContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitRepair(PlayerCommandParser.RepairContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

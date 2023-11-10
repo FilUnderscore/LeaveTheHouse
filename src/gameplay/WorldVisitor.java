@@ -1,5 +1,6 @@
 package gameplay;
 
+import consumable.RepairKit;
 import consumable.food.Bread;
 import consumable.food.Mead;
 import consumable.food.RoastBoar;
@@ -61,6 +62,8 @@ public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
         // Openers
         put("key", Key.class);
         put("lockpick", LockPick.class);
+
+        put("repairkit", RepairKit.class);
     }};
 
     private static Map<String, Class<? extends Monster>> MONSTER_MAP = new HashMap<>() {{

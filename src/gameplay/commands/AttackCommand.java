@@ -31,6 +31,13 @@ public class AttackCommand implements PlayerCommand {
             }
         }
 
+        if(player.getWeapon().broken()) {
+            world.out("Your %s broke, leaving you with one weapon less.", player.getWeapon().getDescription());
+
+            player.getInventory().remove(player.getWeapon());
+            player.unequip();
+        }
+
         boolean finalNotDead = notDead;
         return new CommandResult(() -> {
             if(!finalNotDead)

@@ -58,6 +58,10 @@ public class Player extends Character
         }
     }
 
+    public void unequip() {
+        this.weapon = null;
+    }
+
     public boolean consume(Food food) {
         if(food.isConsumed())
             return false;

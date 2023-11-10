@@ -22,6 +22,7 @@ public class World implements WorldVisitor.Visit {
     Room currentRoom = null;
 
     List<Room> rooms = new ArrayList<>();
+    boolean exit = false;
 
     public void play(Player player)
     {
@@ -60,7 +61,7 @@ public class World implements WorldVisitor.Visit {
             if(player.getHp() <= 0) {
                 out("Game over, you died.");
                 gameInProgress = false;
-            } else if (currentRoom != null && currentRoom.isFinalRoom()) {
+            } else if (currentRoom != null && currentRoom.isFinalRoom() && exit) {
                 out("You won, congratulations!");
                 gameInProgress = false;
             }
@@ -84,6 +85,10 @@ public class World implements WorldVisitor.Visit {
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
         this.onEnterRoom();
+    }
+
+    public boolean exit() {
+        this.exit = true;
     }
 
     private void onEnterRoom() {
