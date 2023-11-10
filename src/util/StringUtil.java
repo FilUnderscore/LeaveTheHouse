@@ -1,5 +1,9 @@
 package util;
 
+/**
+ * Class defining String util methods.
+ * @author Filip Jerkovic 20122575
+ */
 public class StringUtil {
     @FunctionalInterface
     public interface ListAction<T> {

@@ -5,6 +5,10 @@ import gameplay.Player;
 import gameplay.PlayerCommand;
 import gameplay.World;
 
+/**
+ * Class defining Help Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class HelpCommand implements PlayerCommand {
     @Override
     public CommandResult execute(Player player, World world) {
@@ -22,6 +26,7 @@ public class HelpCommand implements PlayerCommand {
                     - wield fistsoffury : Player wields fists of fury (does not appear in inventory).
                     - open <chest> : Opens a treasure or war chest in the inventory. The contents of the chest is placed in the player's inventory and the chest removed.
                     - combine <item> <item> : Combines two items to form a new item.
+                    - repair : Repairs the currently equipped weapon.
                     - help : Displays commands in this mode.
                     """);
         } else if(world.getMode() == PlayMode.BATTLE) {

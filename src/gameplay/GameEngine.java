@@ -1,5 +1,9 @@
 package gameplay;
 
+/**
+ * Class defining Game Engine.
+ * @author Filip Jerkovic 20122575
+ */
 public class GameEngine
 {
 

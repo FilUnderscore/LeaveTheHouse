@@ -4,6 +4,10 @@ import gameplay.*;
 import monsters.Monster;
 import wieldables.Wieldable;
 
+/**
+ * Class defining Attack Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class AttackCommand implements PlayerCommand {
     @Override
     public CommandResult execute(Player player, World world) {

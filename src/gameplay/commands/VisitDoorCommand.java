@@ -2,6 +2,10 @@ package gameplay.commands;
 
 import gameplay.*;
 
+/**
+ * Class defining Visit Door Command.
+ * @author Filip Jerkovic 20122575
+ */
 public final class VisitDoorCommand implements PlayerCommand {
     private final String door;
 

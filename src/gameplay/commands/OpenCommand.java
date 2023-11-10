@@ -5,6 +5,10 @@ import openable.Openable;
 import opener.Opener;
 import util.StringUtil;
 
+/**
+ * Class defining Open Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class OpenCommand implements PlayerCommand {
     private final String chestName;
 

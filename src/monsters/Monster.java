@@ -2,6 +2,10 @@ package monsters;
 
 import gameplay.Character;
 
+/**
+ * Class defining Monster logic (probability, dmg, etc.) as a subclass of Character.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Monster extends Character {
     private int probability, dmg;
 

@@ -2,6 +2,10 @@ package gameplay.commands;
 
 import gameplay.*;
 
+/**
+ * Class defining Combine Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class CombineCommand implements PlayerCommand {
     private final String itemOneName, itemTwoName;
 

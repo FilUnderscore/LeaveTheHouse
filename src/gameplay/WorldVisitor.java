@@ -24,6 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class defining Game Map interpretation logic.
+ * @author Filip Jerkovic 20122575
+ */
 public class WorldVisitor extends GameMapBaseVisitor<WorldVisitor.Visit> {
     public interface Visit {
 

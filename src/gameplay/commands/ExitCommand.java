@@ -5,6 +5,10 @@ import gameplay.Player;
 import gameplay.PlayerCommand;
 import gameplay.World;
 
+/**
+ * Class defining Exit Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class ExitCommand implements PlayerCommand {
     @Override
     public CommandResult execute(Player player, World world) {

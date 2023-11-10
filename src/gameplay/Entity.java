@@ -2,6 +2,10 @@ package gameplay;
 
 import java.util.Random;
 
+/**
+ * Class defining Entity logic.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Entity {
     private final String id, description;
 

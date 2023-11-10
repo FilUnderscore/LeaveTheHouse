@@ -1,5 +1,9 @@
 package gameplay;
 
+/**
+ * Class defining Character logic (hp) as a subclass of Entity.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Character extends Entity {
     private int hp;
 

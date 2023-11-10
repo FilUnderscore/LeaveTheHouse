@@ -2,6 +2,10 @@ package wieldables;
 
 import gameplay.Pickup;
 
+/**
+ * Class defining Wieldable/Weapon logic (durability, low/high dps) as a subclass of Pickup.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Wieldable extends Pickup<Wieldable>
 {
     private final int low, high;

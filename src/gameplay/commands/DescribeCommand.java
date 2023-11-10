@@ -3,6 +3,10 @@ package gameplay.commands;
 import gameplay.*;
 import util.StringUtil;
 
+/**
+ * Class defining Describe Command.
+ * @author Filip Jerkovic 20122575
+ */
 public final class DescribeCommand implements PlayerCommand {
     @Override
     public CommandResult execute(Player player, World world) {

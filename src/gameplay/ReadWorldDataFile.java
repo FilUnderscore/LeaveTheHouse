@@ -13,6 +13,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Class defining text-to-world logic for level loading.
+ * @author Filip Jerkovic 20122575
+ */
 public class ReadWorldDataFile
 {
 

@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class defining World logic (mode, current room, player, etc.).
+ * @author Filip Jerkovic 20122575
+ */
 public class World implements WorldVisitor.Visit {
     Player player = null;
     PlayMode mode = PlayMode.EXPLORE;
@@ -87,7 +91,7 @@ public class World implements WorldVisitor.Visit {
         this.onEnterRoom();
     }
 
-    public boolean exit() {
+    public void exit() {
         this.exit = true;
     }
 

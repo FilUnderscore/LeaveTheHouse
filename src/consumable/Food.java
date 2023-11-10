@@ -1,7 +1,9 @@
 package consumable;
 
-import gameplay.Pickup;
-
+/**
+ * Class containing Food logic (hp value) that is a subclass of Consumable.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Food extends Consumable<Food>
 {
     private final int hp;

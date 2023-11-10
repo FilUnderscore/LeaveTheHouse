@@ -1,5 +1,9 @@
 package gameplay;
 
+/**
+ * Class defining Command logic.
+ * @author Filip Jerkovic 20122575
+ */
 public interface PlayerCommand {
     public final class CommandResult {
         public final boolean success;

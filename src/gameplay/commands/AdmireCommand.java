@@ -3,6 +3,10 @@ package gameplay.commands;
 import consumable.Valuable;
 import gameplay.*;
 
+/**
+ * Class defining Admire Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class AdmireCommand implements PlayerCommand {
     private final String valuableName;
 

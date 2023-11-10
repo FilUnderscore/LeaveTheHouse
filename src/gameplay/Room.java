@@ -5,6 +5,10 @@ import monsters.Monster;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class defining Room logic (pickups, monsters, doors, etc.) as a subclass of Entity.
+ * @author Filip Jerkovic 20122575
+ */
 public class Room extends Entity{
     private boolean finalRoom;
 

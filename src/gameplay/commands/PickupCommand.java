@@ -2,6 +2,10 @@ package gameplay.commands;
 
 import gameplay.*;
 
+/**
+ * Class defining Pickup Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class PickupCommand implements PlayerCommand {
     private final String itemName;
 

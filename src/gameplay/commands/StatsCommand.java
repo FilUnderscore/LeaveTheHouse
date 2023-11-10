@@ -6,6 +6,10 @@ import gameplay.PlayerCommand;
 import gameplay.World;
 import util.StringUtil;
 
+/**
+ * Class defining Stats Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class StatsCommand implements PlayerCommand {
     @Override
     public CommandResult execute(Player player, World world) {

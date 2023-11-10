@@ -4,6 +4,10 @@ import gameplay.commands.*;
 import playercommand_grammar.PlayerCommandBaseVisitor;
 import playercommand_grammar.PlayerCommandParser;
 
+/**
+ * Class defining Player Command interpretation logic.
+ * @author Filip Jerkovic 20122575
+ */
 public class PlayerCommandVisitor extends PlayerCommandBaseVisitor<PlayerCommand>
 {
     @Override

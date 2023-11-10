@@ -15,6 +15,10 @@ import wieldables.Sword;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class defining Pickup logic (combining) as a subclass of Entity.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Pickup<T> extends Entity
 {
     private static final class Combination {

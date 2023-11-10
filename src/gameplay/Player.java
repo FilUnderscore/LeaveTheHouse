@@ -5,6 +5,10 @@ import consumable.Valuable;
 import wieldables.FistsOfFury;
 import wieldables.Wieldable;
 
+/**
+ * Class defining Player logic (confidence, weapon, attacking, inventory, eating, admiring) as a subclass of Character.
+ * @author Filip Jerkovic 20122575
+ */
 public class Player extends Character
 {
     private Inventory inventory;

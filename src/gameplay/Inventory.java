@@ -2,6 +2,10 @@ package gameplay;
 
 import java.util.ArrayList;
 
+/**
+ * Class defining Inventory logic.
+ * @author Filip Jerkovic 20122575
+ */
 public class Inventory 
 {
 	

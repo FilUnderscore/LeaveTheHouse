@@ -3,6 +3,10 @@ package gameplay.commands;
 import consumable.Food;
 import gameplay.*;
 
+/**
+ * Class defining Eat Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class EatCommand implements PlayerCommand {
     private final String foodName;
 

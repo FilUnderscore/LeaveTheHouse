@@ -1,5 +1,9 @@
 package consumable;
 
+/**
+ * Class containing Valuable logic (confidence value) that is a subclass of Consumable.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Valuable extends Consumable<Valuable>
 {
     private final int value;

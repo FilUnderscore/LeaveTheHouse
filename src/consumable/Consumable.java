@@ -2,6 +2,10 @@ package consumable;
 
 import gameplay.Pickup;
 
+/**
+ * Class containing Consumable logic (is consumed) that is a subclass of Pickup.
+ * @author Filip Jerkovic 20122575
+ */
 public abstract class Consumable<T> extends Pickup<T>
 {
     private boolean consumed = false;

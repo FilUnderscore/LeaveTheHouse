@@ -3,6 +3,10 @@ package gameplay.commands;
 import consumable.RepairKit;
 import gameplay.*;
 
+/**
+ * Class defining Repair Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class RepairCommand implements PlayerCommand {
     @Override
     public CommandResult execute(Player player, World world) {

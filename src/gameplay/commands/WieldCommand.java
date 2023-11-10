@@ -5,6 +5,10 @@ import gameplay.Player;
 import gameplay.PlayerCommand;
 import gameplay.World;
 
+/**
+ * Class defining Wield Command.
+ * @author Filip Jerkovic 20122575
+ */
 public class WieldCommand implements PlayerCommand {
     private final String itemName;
 
