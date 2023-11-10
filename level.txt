@@ -22,6 +22,12 @@ ROOM bathroom {
     DOOR hallway
 
     ITEM bread
+
+    MONSTER ghost {
+        hp 5
+        dmg 2
+        prob 100
+    }
 }
 
 ROOM hallway {
@@ -63,6 +69,12 @@ ROOM dining {
 
     ITEM chalice
     ITEM key
+
+    MONSTER dingo {
+        hp 10
+        dmg 5
+        prob 100
+    }
 }
 
 ROOM garage {
@@ -112,4 +124,10 @@ ROOM porch {
 
 ROOM outside {
     final
+
+    MONSTER dingo {
+        hp 40
+        dmg 5
+        prob 100
+    }
 }
