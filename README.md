@@ -8,6 +8,7 @@ You are Sir Kendric, a former Knight who once died in the basement of this house
 * Crafting system where items can be combined to create stronger weapons or higher quality food.
 * Turn-based fighting system.
 * Loot chests and rooms for better gear.
+* Grammar-based controls.
 
 ## How to play
 Clone the repository and compile the source code. Run the jar file in a terminal window to begin the game.
